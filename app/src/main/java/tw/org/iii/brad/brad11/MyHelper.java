@@ -20,8 +20,8 @@ public class MyHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {//on開頭不是我們呼叫的;會自動幫我們創資料庫
-        Log.v("brad","MyHelper:onCreate()");
-        db.execSQL(createTable);
+        Log.v("brad","MyHelper:onCreate()"+"\n"+db);
+        db.execSQL(createTable);    //帶入SQL語法, 在上面
     }
 
     @Override

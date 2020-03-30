@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        myHelper = new MyHelper(this,"iii",null,1);//第二參數資料庫名,四為版本
+        myHelper = new MyHelper(this,"iii",null,1);//第二參數資料庫名,三為cursor通常不管,四為版本
         // 用 int 當 version 正整數共有 24億(十位數) 剛好可用日期 20200315 後面加上版本流水號,例 2020031501
         db = myHelper.getReadableDatabase();
 
@@ -32,13 +32,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void q(View view) {
         // SELECT * from cust
-        Cursor cursor = db.query("cust",null,
-                "cname like ? or tel like ? or birthday like ?",
+//        db.query("cust",null,
+//                null,null,
+//                null,null,null);
+        Cursor cursor = db.query("cust",null, //若要查欄位則把欄位用String填入columns參數位置,null則是全部*
+                "cname like ? or tel like ? or birthday like ?", //三為where,參數用問號代替
                 new String[]{"%"+keyword.getText().toString()+"%",
                         "%"+keyword.getText().toString()+"%",
                         "%"+keyword.getText().toString()+"%"},
                 null,null,null);
-        //若要查欄位則把欄位用String填入columns參數位置,第三參數為where,參數用問號代替,第四參數寫問號的值
+        //第四參數寫問號的值
         Log.v("brad","column count:" + cursor.getColumnCount());
 
         StringBuffer sb = new StringBuffer();

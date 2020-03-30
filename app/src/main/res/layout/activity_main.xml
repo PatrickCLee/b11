@@ -15,26 +15,26 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="ins"
-        android:text="insert" />
+        android:text="insert"
+        android:onClick="ins" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="del"
-        android:text="delete" />
+        android:text="delete"
+        android:onClick="del" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="update"
-        android:text="update" />
+        android:text="update"
+        android:onClick="update" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="q"
-        android:text="query" />
+        android:text="query"
+        android:onClick="q" />
 
     <ScrollView
         android:layout_width="match_parent"
