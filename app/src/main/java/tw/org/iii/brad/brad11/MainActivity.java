@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 //                null,null,null);
         Cursor cursor = db.query("cust",null, //若要查欄位則把欄位用String填入columns參數位置,null則是全部*
                 "cname like ? or tel like ? or birthday like ?", //三為where,參數用問號代替
-                new String[]{"%"+keyword.getText().toString()+"%",
+                new String[]{"%"+keyword.getText().toString()+"%",  //模糊查詢,因上方的code為or,故只要EditText輸入欄中的關鍵字有在上方三個欄位中出現即會被查詢到
                         "%"+keyword.getText().toString()+"%",
                         "%"+keyword.getText().toString()+"%"},
                 null,null,null);
@@ -46,13 +46,13 @@ public class MainActivity extends AppCompatActivity {
 
         StringBuffer sb = new StringBuffer();
         while(cursor.moveToNext()){
-            String id = cursor.getString(cursor.getColumnIndex("id"));
+            String id = cursor.getString(cursor.getColumnIndex("id"));//getString內參數為columnIndex,但若這樣寫code不易識別,故用getColumnIndex給key傳回index
             String cname = cursor.getString(cursor.getColumnIndex("cname"));
             String tel = cursor.getString(cursor.getColumnIndex("tel"));
             String birthday = cursor.getString(cursor.getColumnIndex("birthday"));
             Log.v("brad", id +":"+cname+":"+tel+":"+birthday);
             String row = id +":"+cname+":"+tel+":"+birthday;
-            sb.append(row + "\n");
+            sb.append(row + "\n");  //一直append的StringBuffer
         }
         tv.setText(sb);
     }
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         data.put("cname","Arya");   //id為自動遞增的主key,不需手動新增輸入
         data.put("tel","089");
         data.put("birthday","14");
-        db.insert("cust",null,data);//第二參數針對null要做的動作
+        db.insert("cust",null,data);//第二參數針對null要做的動作,資料會放在三參數上
         q(null); //呼叫q,因為(q的code內容)與畫面(view)無關,故參數直接帶null
     }
 
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         q(null);
     }
 
-    public void update(View view) { //是增和刪的sum,(同時利用到兩者裡面的code的概念)
+    public void update(View view) { //是增和刪的sum,(同時利用到兩者裡面的code)
         //UPDATE cust SET cname = 'Meow', tel='345', WHERE id = 3;
         ContentValues data = new ContentValues();
         data.put("cname","Meow");
